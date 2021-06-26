@@ -1,5 +1,5 @@
-# nvim-config
-my nvim config
+# neovim-config
+my neovim config
 
 # requirements
 
