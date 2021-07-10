@@ -1,17 +1,14 @@
 call plug#begin('~/.local/share/nvim/plugged')
  
 "Colors
-Plug 'navarasu/onedark.nvim'
-
-"Javascript
-Plug 'chrisbra/Colorizer'
+Plug 'norcalli/nvim-colorizer.lua'
+Plug 'wiliamks/mechanical.nvim'
 
 " Dart
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'akinsho/flutter-tools.nvim'
 
 " Markdown
-Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 " Theme
@@ -20,7 +17,7 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Files
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'kyazdani42/nvim-web-devicons' " for file icons
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 
 " Fzf
@@ -50,12 +47,18 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 "Tools
 Plug 'nvim-lua/plenary.nvim'
 Plug 'preservim/nerdcommenter'
-Plug 'Yggdroot/indentLine'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'mhinz/vim-startify'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'onsails/lspkind-nvim'
+Plug 'akinsho/nvim-bufferline.lua'
+Plug 'sunjon/shade.nvim'
+
+" Format
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
+Plug 'google/vim-glaive'
 
 " Git
 Plug 'tpope/vim-fugitive'

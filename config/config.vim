@@ -7,21 +7,17 @@ set confirm
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 
-colorscheme colors
-hi Normal guibg=NONE ctermbg=NONE
-
 set autoread
 set ignorecase
 au FocusGained,BufEnter * checktime
 
 set mouse=a
 
-command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+command! W execute 'w' <bar> edit!
+command! Q execute 'q' <bar> edit!
+command! WQ execute 'wq' <bar> edit!
 
 set shiftwidth=4
 set softtabstop=4
 
 set completeopt=menuone,noselect
-
-"set termguicolors
-

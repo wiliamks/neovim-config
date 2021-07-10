@@ -12,3 +12,6 @@ vim.cmd("set pumheight=45")
 require("flutter-tools").setup{} -- use defaults
 
 require('lspkind').init()
+
+-- setup nvim-go
+--require 'go'.setup{}

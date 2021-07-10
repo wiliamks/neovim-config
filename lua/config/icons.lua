@@ -1,3 +1,7 @@
+require "bufferline".setup{}
+
+require "colorizer".setup()
+
 require "nvim-web-devicons".setup {
     override = {
         html = {
@@ -83,6 +87,11 @@ require "nvim-web-devicons".setup {
         rpm = {
             icon = "",
             name = "rpm"
-        }
+        },
+	dart = {
+            icon = require'nvim-web-devicons'.get_icon("", "dart"),
+	    name = "dart",
+	    color = "#EC7000"
+	},
     }
 }
