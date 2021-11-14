@@ -1,8 +1,9 @@
+nnoremap ; :
+
 nnoremap <C-b> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
 
-"unmap ,
 nnoremap <C-f> :Lines <CR>
 nnoremap <leader><C-f> :Ag <CR> 
 
@@ -31,36 +32,50 @@ nnoremap  <leader>Y  "+yg_
 nnoremap  <leader>y  "+y
 nnoremap  <leader>yy  "+yy
 
-" Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
 
-" Avoid showing message extra message when using completion
-"set shortmess+=c
-
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
-
-nnoremap <silent><leader>a :Lspsaga code_action<CR>
-vnoremap <silent><leader>a :<C-U>Lspsaga range_code_action<CR>
+nnoremap <silent><leader>a :CodeActionMenu<CR>
+vnoremap <silent><leader>a :<C-U>CodeActionMenu<CR>
 
 nnoremap <silent>K :Lspsaga hover_doc<CR>
 
 nnoremap <C-r> :Lspsaga rename<CR>
 
-nnoremap <silent> gd :Lspsaga preview_definition<CR>
+nnoremap <silent>gd <cmd>lua require('goto-preview').goto_preview_definition()<CR>
 
-nnoremap <silent> gh :Lspsaga lsp_finder<CR>
+nnoremap <silent> gh <cmd>lua require('goto-preview').goto_preview_references()<CR>
+nnoremap <silent> gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>
 
 nnoremap <silent> gs :Lspsaga signature_help<CR>
 
-nnoremap <silent> <leader>cd :Lspsaga show_line_diagnostics<CR>
+nnoremap <silent> [e :Trouble<CR>
+nnoremap <silent> ]e :TroubleClose<CR>
 
-nnoremap <silent> [e :Lspsaga diagnostic_jump_next<CR>
-nnoremap <silent> ]e :Lspsaga diagnostic_jump_prev<CR>
+nnoremap <leader>S :lua require('spectre').open()<CR>
+
+nnoremap <silent> <leader>rn <cmd>lua require('renamer').rename()<cr>
+vnoremap <silent> <leader>rn <cmd>lua require('renamer').rename()<cr>
+
+nnoremap 0 ^
+
+" Move to previous/next
+nnoremap <silent> <leader>n :BufferNext<CR>
+nnoremap <silent> <leader>p :BufferPrevious<CR>
+" Re-order to previous/next
+nnoremap <silent>    <A-<> :BufferMovePrevious<CR>
+nnoremap <silent>    <A->> :BufferMoveNext<CR>
+" Goto buffer in position...
+nnoremap <silent>    <A-1> :BufferGoto 1<CR>
+nnoremap <silent>    <A-2> :BufferGoto 2<CR>
+nnoremap <silent>    <A-3> :BufferGoto 3<CR>
+nnoremap <silent>    <A-4> :BufferGoto 4<CR>
+nnoremap <silent>    <A-5> :BufferGoto 5<CR>
+nnoremap <silent>    <A-6> :BufferGoto 6<CR>
+nnoremap <silent>    <A-7> :BufferGoto 7<CR>
+nnoremap <silent>    <A-8> :BufferGoto 8<CR>
+nnoremap <silent>    <A-9> :BufferLast<CR>
+" Pin/unpin buffer
+nnoremap <silent>    <A-p> :BufferPin<CR>
+" Close buffer
+nnoremap <silent>    <A-c> :BufferClose<CR>

@@ -1,3 +1,5 @@
+map , <leader>
+
 set noswapfile
 set nobackup
 set nowb
@@ -21,3 +23,5 @@ set shiftwidth=4
 set softtabstop=4
 
 set completeopt=menuone,noselect
+
+set termguicolors
