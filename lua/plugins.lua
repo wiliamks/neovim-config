@@ -17,21 +17,11 @@ require('packer').startup(function()
     -- Colors
     use { 'norcalli/nvim-colorizer.lua', config = function() require 'colorizer'.setup() end }
     use 'wiliamks/mechanical.nvim' -- colorscheme
-    use 'p00f/nvim-ts-rainbow'
-
-    -- Orgmode
-    use {'kristijanhusak/orgmode.nvim', config = function() require('orgmode').setup{} end }
-    use { 'lukas-reineke/headlines.nvim', config = function() require 'headlines'.setup() end }
-    use {"akinsho/org-bullets.nvim", config = function() require 'org-bullets'.setup { symbols = { "◉", "○", "✸", "✿" } } end }
 
     -- Dart
     use 'dart-lang/dart-vim-plugin'
     use 'akinsho/flutter-tools.nvim'
     use 'udalov/kotlin-vim'
-
-    -- Javascript
-    use 'mxw/vim-jsx'
-    use 'pangloss/vim-javascript'
 
     -- Rust
     use 'rust-lang/rust.vim'
@@ -60,6 +50,8 @@ require('packer').startup(function()
     use 'kosayoda/nvim-lightbulb'
     use 'folke/trouble.nvim'
     use 'williamboman/nvim-lsp-installer'
+    use { 'RishabhRD/nvim-lsputils', requires = { 'RishabhRD/popfix' } }
+    use { 'https://gitlab.com/yorickpeterse/nvim-dd', config = function() require 'dd'.setup() end }
     use {
 	'filipdutescu/renamer.nvim',
 	branch = 'master',
@@ -88,9 +80,8 @@ require('packer').startup(function()
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
     -- Tools
-    use 'mfussenegger/nvim-dap'
-    use 'rcarriga/nvim-dap-ui'
-    use 'glepnir/dashboard-nvim'
+    use 'goolord/alpha-nvim'
+
     use 'nvim-lua/plenary.nvim'
     use 'nvim-lua/popup.nvim'
     use 'preservim/nerdcommenter'
@@ -98,7 +89,6 @@ require('packer').startup(function()
     use 'lukas-reineke/indent-blankline.nvim'
     use { 'kevinhwang91/nvim-hclipboard', config = function() require 'hclipboard'.start() end }
     use 'matze/vim-move'
-    use 'wellle/targets.vim'
     use 'tpope/vim-surround' --quoting/parenthesizing
     use 'tpope/vim-endwise'
     use 'windwp/nvim-spectre' --Find and replace

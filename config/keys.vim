@@ -1,4 +1,5 @@
 nnoremap ; :
+nnoremap 0 ^
 
 nnoremap <C-b> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
@@ -38,16 +39,10 @@ set completeopt=menuone,noinsert,noselect
 nnoremap <silent><leader>a :CodeActionMenu<CR>
 vnoremap <silent><leader>a :<C-U>CodeActionMenu<CR>
 
-nnoremap <silent>K :Lspsaga hover_doc<CR>
-
-nnoremap <C-r> :Lspsaga rename<CR>
-
 nnoremap <silent>gd <cmd>lua require('goto-preview').goto_preview_definition()<CR>
 
 nnoremap <silent> gh <cmd>lua require('goto-preview').goto_preview_references()<CR>
 nnoremap <silent> gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>
-
-nnoremap <silent> gs :Lspsaga signature_help<CR>
 
 nnoremap <silent> [e :Trouble<CR>
 nnoremap <silent> ]e :TroubleClose<CR>
@@ -57,7 +52,10 @@ nnoremap <leader>S :lua require('spectre').open()<CR>
 nnoremap <silent> <leader>rn <cmd>lua require('renamer').rename()<cr>
 vnoremap <silent> <leader>rn <cmd>lua require('renamer').rename()<cr>
 
-nnoremap 0 ^
+nnoremap <silent><C-k><C-s> :Neogit<CR>
+nnoremap <silent><C-k><C-d> :DiffviewOpen<CR>
+nnoremap <silent><C-k><C-h> :DiffviewFileHistory<CR>
+map <silent><C-k><C-c> <cmd>DiffviewClose<CR>
 
 " Move to previous/next
 nnoremap <silent> <leader>n :BufferNext<CR>
