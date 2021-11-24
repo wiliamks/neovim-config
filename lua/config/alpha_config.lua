@@ -8,11 +8,6 @@ local function button(sc, txt, keybind, keybind_opts)
   return b
 end
 
-local function pick_color()
-  local colors = {"String", "Identifier", "Keyword", "Number"}
-  return colors[math.random(#colors)]
-end
-
 local function footer()
     local handle = io.popen('fd -d 2 . $HOME"/.local/share/nvim/site/pack/packer" | head -n -2 | wc -l | tr -d "\n" ')
     local plugins = handle:read("*a")
@@ -46,7 +41,7 @@ dashboard.section.buttons.val = {
     button( "h", "  Recents" , ":Telescope oldfiles<CR>"),
     button( "y", "  Explore" , ":Telescope file_browser<CR>"),
     button( "u", "  Update plugins", ":PackerSync<CR>"),
-    button( "s", "  Settings" , ":e $MYVIMRC | :cd %:p:h | split . | wincmd k | pwd<CR>"),
+    button( "s", "  Settings" , ":e $MYVIMRC | :cd %:p:h | wincmd k | pwd<CR>"),
     button( "q", "  Quit NVIM", ":qa<CR>"),
 }
 

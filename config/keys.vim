@@ -1,30 +1,30 @@
 nnoremap ; :
 nnoremap 0 ^
+vnoremap 0 ^
 
 nnoremap <C-b> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
 
-nnoremap <C-f> :Lines <CR>
-nnoremap <leader><C-f> :Ag <CR> 
+nnoremap <leader><C-f> <cmd>Telescope live_grep<cr>
+nnoremap <C-f> /
 
-nnoremap <leader><Tab> :Buffers <CR>
+nnoremap <leader><Tab> <cmd>Telescope buffers<cr>
 
 nnoremap <leader><C-s> :bd <CR>
 nnoremap <leader>n :bn<CR>
 nnoremap <leader>p :bp<CR>
 
 vnoremap <c-f> y<ESC>/<c-r>"<CR>   
-vnoremap <leader><c-f> y<ESC> :Ag <c-r>"<CR>
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
 " Clear highlighting on escape in normal mode
 nnoremap <esc> :noh<return><esc>
 nnoremap <esc>^[ <esc>^[
 
-nnoremap <leader>ff <cmd>Files<cr>
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Buffers<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>, viw
 
@@ -39,9 +39,9 @@ set completeopt=menuone,noinsert,noselect
 nnoremap <silent><leader>a :CodeActionMenu<CR>
 vnoremap <silent><leader>a :<C-U>CodeActionMenu<CR>
 
-nnoremap <silent>gd <cmd>lua require('goto-preview').goto_preview_definition()<CR>
+nnoremap <silent>pgd <cmd>lua require('goto-preview').goto_preview_definition()<CR>
 
-nnoremap <silent> gh <cmd>lua require('goto-preview').goto_preview_references()<CR>
+nnoremap <silent>pgr <cmd>lua require('goto-preview').goto_preview_references()<CR>
 nnoremap <silent> gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>
 
 nnoremap <silent> [e :Trouble<CR>

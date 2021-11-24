@@ -3,17 +3,6 @@ require('packer').startup(function()
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
-    -- Navigation
-    use {
-	'karb94/neoscroll.nvim',
-	config = function()
-	    require 'neoscroll'.setup({
-		mappings = {'<C-u>', '<C-d>', '<C-n>', '<C-f>',
-		'<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
-	    })
-	end
-    }
-
     -- Colors
     use { 'norcalli/nvim-colorizer.lua', config = function() require 'colorizer'.setup() end }
     use 'wiliamks/mechanical.nvim' -- colorscheme
@@ -37,10 +26,6 @@ require('packer').startup(function()
     use { 'kyazdani42/nvim-web-devicons', config = function() require "nvim-web-devicons".setup {} end }
     use 'kyazdani42/nvim-tree.lua'
 
-    -- Fzf
-    use { 'junegunn/fzf', run = function() vim.fz['fzf#install'](0) end }
-    use 'junegunn/fzf.vim'
-
     -- LSP
     use 'neovim/nvim-lspconfig'
     use 'weilbith/nvim-code-action-menu'
@@ -50,8 +35,6 @@ require('packer').startup(function()
     use 'kosayoda/nvim-lightbulb'
     use 'folke/trouble.nvim'
     use 'williamboman/nvim-lsp-installer'
-    use { 'RishabhRD/nvim-lsputils', requires = { 'RishabhRD/popfix' } }
-    use { 'https://gitlab.com/yorickpeterse/nvim-dd', config = function() require 'dd'.setup() end }
     use {
 	'filipdutescu/renamer.nvim',
 	branch = 'master',
