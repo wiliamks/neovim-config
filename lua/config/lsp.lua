@@ -51,6 +51,8 @@ require 'lsp_signature'.setup({
 require 'trouble'.setup {
     height = 8,
     auto_close = true,
+    mode = "lsp_document_diagnostics",
+    group = false
 }
 
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {

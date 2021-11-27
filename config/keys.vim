@@ -36,6 +36,8 @@ nnoremap  <leader>yy  "+yy
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
 
+nnoremap <F5> :UndotreeToggle<CR>
+
 nnoremap <silent><leader>a :CodeActionMenu<CR>
 vnoremap <silent><leader>a :<C-U>CodeActionMenu<CR>
 
@@ -56,6 +58,11 @@ nnoremap <silent><C-k><C-s> :Neogit<CR>
 nnoremap <silent><C-k><C-d> :DiffviewOpen<CR>
 nnoremap <silent><C-k><C-h> :DiffviewFileHistory<CR>
 map <silent><C-k><C-c> <cmd>DiffviewClose<CR>
+
+" Fugitive Conflict Resolution
+nnoremap <leader>gd :Gvdiffsplit!<CR>
+nnoremap gdh :diffget //2<CR>
+nnoremap gdl :diffget //3<CR>
 
 " Move to previous/next
 nnoremap <silent> <leader>n :BufferNext<CR>

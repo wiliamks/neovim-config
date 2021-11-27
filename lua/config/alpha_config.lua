@@ -12,7 +12,7 @@ local function footer()
     local handle = io.popen('fd -d 2 . $HOME"/.local/share/nvim/site/pack/packer" | head -n -2 | wc -l | tr -d "\n" ')
     local plugins = handle:read("*a")
     handle:close()
-    local datetime = os.date("%d-%m-%Y  %H:%M:%S")
+    local datetime = os.date("%d-%m-%Y  %H:%M")
     --return "Footer test"
     return plugins .. " plugins  " .. datetime
 end

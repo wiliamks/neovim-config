@@ -28,7 +28,13 @@ require('packer').startup(function()
 
     -- LSP
     use 'neovim/nvim-lspconfig'
-    use 'weilbith/nvim-code-action-menu'
+    use {
+	'weilbith/nvim-code-action-menu',
+	config = function()
+	    vim.g.code_action_menu_show_diff = false
+	    vim.g.code_action_menu_show_details = false
+	end
+    }
     use { 'onsails/lspkind-nvim', config = function() require 'lspkind'.init() end }
     use { 'rmagatti/goto-preview', config = function() require 'goto-preview'.setup {} end }
     use 'ray-x/lsp_signature.nvim'
@@ -61,6 +67,7 @@ require('packer').startup(function()
 
     -- Syntax
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+    use 'p00f/nvim-ts-rainbow'
 
     -- Tools
     use 'goolord/alpha-nvim'
@@ -70,11 +77,11 @@ require('packer').startup(function()
     use 'preservim/nerdcommenter'
     use 'nvim-telescope/telescope.nvim'
     use 'lukas-reineke/indent-blankline.nvim'
-    use { 'kevinhwang91/nvim-hclipboard', config = function() require 'hclipboard'.start() end }
     use 'matze/vim-move'
     use 'tpope/vim-surround' --quoting/parenthesizing
     use 'tpope/vim-endwise'
     use 'windwp/nvim-spectre' --Find and replace
+    use 'mbbill/undotree'
 
 
     -- Format
@@ -82,7 +89,8 @@ require('packer').startup(function()
 
     -- Git
     use 'tpope/vim-fugitive' --Git wrapper for vim
-    use 'airblade/vim-gitgutter' --Git status column
+    --use 'airblade/vim-gitgutter' --Git status column
+    use { 'lewis6991/gitsigns.nvim', config = function() require('gitsigns').setup() end }
     use 'sindrets/diffview.nvim'
     use { 'folke/todo-comments.nvim', config = function() require 'todo-comments'.setup{} end }
     use { 'TimUntersberger/neogit', config = function() require 'neogit'.setup {} end }
