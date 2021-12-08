@@ -9,7 +9,6 @@ cmp.setup {
 	{ name = 'emoji' },
 	{ name = 'latex_symbols' },
 	{ name = 'vsnip' },
-	{ name = 'orgmode' }
     },
     mapping = {
 	['<C-d>'] = cmp.mapping.scroll_docs(-4),
@@ -27,7 +26,7 @@ cmp.setup {
     },
     snippet = {
       expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body)
+	vim.fn["vsnip#anonymous"](args.body)
       end,
     },
     formatting = {
@@ -39,4 +38,18 @@ cmp.setup {
 	    return vim_item
 	end,
     },
+    completion = {
+	completeopt = 'menu,menuone,noinsert',
+    }
 }
+
+require'nvim-autopairs'.setup {
+    map_cr = true,
+    check_ts = true,
+    disable_filetype = { "TelescopePrompt", "spectre_panel" },
+}
+
+--local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+--cmp.event:on('confirm_done', cmp_autopairs)
+--cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done { map_char = { all = "(", tex = "{", } })
+--cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))

@@ -1,8 +1,6 @@
-require 'plugins'
-require 'config'
+pcall(require, 'impatient')
 
-vim.cmd [[
-    source ~/.config/nvim/config/config.vim
-    source ~/.config/nvim/config/keys.vim
-    source ~/.config/nvim/config/settings.vim
-]]
+vim.g.mapleader = ','
+
+require 'packer'
+require 'config'
