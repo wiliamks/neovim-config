@@ -53,6 +53,8 @@ require 'nvim-treesitter.configs'.setup {
 
 
 vim.cmd[[
+	colorscheme mechanical
+
 	hi DevIconDockerfile guifg=cyan
 	hi DevIconGitIgnore guifg=#ff3e00
 	hi DevIconDart guifg=#51a0cf
