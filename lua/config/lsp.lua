@@ -1,79 +1,73 @@
-local on_attach = function(_, bufnr)
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+local vim = vim
+local api = vim.api
 
-    local opts = { noremap = true, silent = true }
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'i', '<C-a>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>so', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
-    vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+local on_attach = function(_, bufnr)
+	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+	local opts = { noremap = true, silent = true, buffer = bufnr }
+	vim.keymap.set('n', 'gD', vim.lsp.buf.definition, opts)
+	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+	vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+	vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+	vim.keymap.set('i', '<C-a>', vim.lsp.buf.signature_help, opts)
+	vim.keymap.set('n', '<C-a>', vim.lsp.buf.signature_help, opts)
+	vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
+	vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
+	vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
+	vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+	vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
+	vim.keymap.set('n', '[d', vim.diagnostic.goto_next, opts)
+	vim.keymap.set('n', ']d', vim.diagnostic.goto_prev, opts)
+	vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
+	vim.keymap.set('n', '<leader>so', require('telescope.builtin').lsp_document_symbols, opts)
+
+	vim.cmd [[ command! FormatLsp execute 'lua vim.lsp.buf.format { async = true }' ]]
 end
 
-local lsp_installer = require("nvim-lsp-installer")
-
-lsp_installer.on_server_ready(function(server)
-
-    local opts = {
-	on_attach = on_attach
-    }
-
-    server:setup(opts)
-    vim.cmd [[ do User LspAttachBuffers ]]
-end)
+require("mason").setup()
+require("mason-lspconfig").setup()
+require("mason-lspconfig").setup_handlers {
+	function(server_name)
+		require("lspconfig")[server_name].setup {
+			on_attach = on_attach
+		}
+	end,
+}
 
 vim.cmd("set pumheight=10")
 vim.cmd("set shortmess+=c")
 
-require 'flutter-tools'.setup{
-    widget_guides = {
-	enabled = true,
-    },
-    lsp = {
-	on_attach = on_attach
-    }
+require 'flutter-tools'.setup {
+	widget_guides = {
+		enabled = true,
+	},
+	lsp = {
+		on_attach = on_attach
+	}
 }
 
-require 'lsp_signature'.setup({
-    floating_window = false
+vim.diagnostic.config({
+	virtual_text = false,
 })
 
-require 'trouble'.setup {
-    height = 8,
-    auto_close = true,
-    mode = "lsp_document_diagnostics",
-    group = false
-}
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+	local hl = "DiagnosticSign" .. type
+	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
 
-require'navigator'.setup({
-    debug = true,
-    width = 0.9,
-    lsp_installer = true,
-    transparency = 100,
-    default_mapping = true,
-    lsp = {
-	code_action = { enable = false, virtual_text = false },
-	diagnostic_virtual_text = false
-    }
+local metals_config = require("metals").bare_config()
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+metals_config.on_attach = on_attach
+
+local nvim_metals_group = api.nvim_create_augroup("nvim-metals", { clear = true })
+api.nvim_create_autocmd("FileType", {
+  pattern = { "scala", "sbt", "java" },
+  callback = function()
+    require("metals").initialize_or_attach(metals_config)
+  end,
+  group = nvim_metals_group,
 })
 
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = false,
-    signs = true,
-    update_in_insert = true,
-})
-
---vim.lsp.handlers["textDocument/references"] = require 'telescope.builtin'.lsp_references
-vim.lsp.handlers["textDocument/references"] = require 'navigator.reference'.reference_handler
---vim.lsp.handlers["textDocument/references"] = require 'better-reference'.reference_handler
-
+vim.lsp.handlers["textDocument/references"] = require 'nice-reference'.reference_handler

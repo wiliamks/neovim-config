@@ -1,5 +1,6 @@
+local api = vim.api
+
 local dashboard = require"alpha.themes.dashboard"
-math.randomseed(os.time())
 
 local function button(sc, txt, keybind, keybind_opts)
   local b = dashboard.button(sc, txt, keybind, keybind_opts)
@@ -13,7 +14,6 @@ local function footer()
     local plugins = handle:read("*a")
     handle:close()
     local datetime = os.date("%d-%m-%Y  %H:%M")
-    --return "Footer test"
     return plugins .. " plugins  " .. datetime
 end
 
@@ -49,11 +49,3 @@ dashboard.section.footer.val = footer()
 dashboard.section.footer.opts.hl = "Constant"
 
 require"alpha".setup(dashboard.opts)
-
--- hide tabline on startup screen
-vim.cmd [[
-augroup alpha_tabline
-  au!
-  au FileType alpha set showtabline=0 | au BufUnload <buffer> set showtabline=2
-augroup END
-]]

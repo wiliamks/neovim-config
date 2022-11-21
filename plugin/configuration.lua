@@ -13,12 +13,22 @@ vim.o.shiftwidth = vim.o.tabstop
 vim.o.termguicolors = true
 vim.o.mouse = "a"
 
-vim.g.indentLine_fileTypeExclude = { 'alpha', 'packer' }
+vim.g.indentLine_fileTypeExclude = { 'alpha', 'packer', 'vimwiki', 'help', 'man' }
+
+vim.o.clipboard = "unnamedplus"
+
+vim.opt.wrap = false
+vim.opt.colorcolumn = "100"
 
 vim.cmd [[ 
-    command! W execute 'w' <bar> edit!
-    command! Q execute 'q' <bar> edit!
-    command! WQ execute 'wq' <bar> edit!
+	set backspace=indent,eol,start
+	"set statusline=""
+	command! W execute 'w' <bar> edit!
+	command! Q execute 'q' <bar> edit!
+	command! WQ execute 'wq' <bar> edit!
 
-    setlocal noet ts=4 sw=4 sts=4
+	setlocal noet ts=4 sw=4 sts=4
+
+	set noshowcmd  " to get rid of display of last command
+	set shortmess+=F  
 ]]

@@ -1,6 +1,4 @@
-pcall(require, 'impatient')
-
 vim.g.mapleader = ','
 
-require 'packer'
+require 'plugins'
 require 'config'
