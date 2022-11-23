@@ -6,8 +6,9 @@ local function map(mode, key, action)
 end
 
 vim.keymap.set("n", ";", ":", { noremap = true })
-vim.keymap.set("n", "0", "^", { noremap = true })
-vim.keymap.set("v", "0", "^", { noremap = true })
+vim.keymap.set({ 'n', 'v' }, "0", "^", { noremap = true })
+vim.keymap.set({ 'n', 'v', 'i' }, "<F11>", "<Home>", { noremap = true })
+vim.keymap.set({ 'n', 'v', 'i' }, "<F12>", "<End>", { noremap = true })
 
 map("n", "<C-b>", "<cmd>Neotree toggle<CR>")
 map("i", "<C-b>", "<cmd>Neotree toggle<CR>")

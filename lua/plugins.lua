@@ -25,7 +25,6 @@ packer.startup(function()
 	-- Colors
 	use { 'norcalli/nvim-colorizer.lua', config = function() require 'colorizer'.setup() end }
 	use { 'wiliamks/mechanical.nvim', config = function() vim.cmd [[ colorscheme mechanical ]] end }
-	--use { '/home/wiliamks/Projects/VimPlugins/mechanical.nvim', config = function() vim.cmd [[ colorscheme mechanical ]] end }
 	use {
 		'Mofiqul/adwaita.nvim',
 		config = function()
@@ -53,8 +52,14 @@ packer.startup(function()
 	use { 'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview', ft = { 'markdown' } }
 
 	-- Theme
-	use { 'hoob3rt/lualine.nvim',
-		config = function() require 'lualine'.setup { options = { theme = 'nord', globalstatus = true } } end } --theme = 'adwaita'
+	use {
+		'hoob3rt/lualine.nvim',
+		config = function()
+			require 'lualine'.setup {
+				options = { theme = 'nord', globalstatus = true } --theme = 'adwaita'
+			}
+		end
+	}
 	--use 'romgrk/barbar.nvim'
 
 	-- Files
@@ -76,7 +81,6 @@ packer.startup(function()
 		"neovim/nvim-lspconfig",
 	}
 	use 'wiliamks/nice-reference.nvim'
-	use 'williamboman/nvim-lsp-installer'
 	use { 'rmagatti/goto-preview', config = function() require 'goto-preview'.setup {} end }
 	use { 'weilbith/nvim-code-action-menu', event = "BufRead",
 		config = function() vim.g.code_action_menu_show_details = false end }

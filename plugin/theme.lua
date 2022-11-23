@@ -87,6 +87,8 @@ local highlights = {
 	TelescopePreviewBorder = { fg = c.bg1, bg = c.bg2 },
 	TelescopePreviewNormal = { fg = c.fg, bg = c.bg2 },
 	TelescopeSelection = { bg = c.bg1 },
+	NeotreeDirectoryIcon = { fg = '#d4b27c' },
+	NeotreeDirectoryName = { fg = c.fg }
 }
 
 for hl, col in pairs(highlights) do
