@@ -53,3 +53,7 @@ map("n", "gdl", ":diffget //3<CR>")
 
 -- Formatting
 map ("n", "<C-k><C-f>", ":Format<CR>")
+
+for i = 1, 99 do
+	vim.keymap.set('n', i .. 'b', '<cmd>b ' .. i .. '<CR>')
+end
