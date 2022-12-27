@@ -1,8 +1,5 @@
 require("lazy").setup({
 	'lewis6991/impatient.nvim',
-
-	-- Packer can manage itself
-	'wbthomason/packer.nvim',
 	'voldikss/vim-floaterm',
 
 	-- Telescope
