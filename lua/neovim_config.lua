@@ -1,3 +1,6 @@
+vim.g.mapleader = ','
+vim.o.termguicolors = true
+
 vim.o.confirm = true
 vim.o.swapfile = false
 vim.o.backup = false
@@ -10,7 +13,6 @@ vim.o.ignorecase = true
 vim.o.tabstop = 4
 vim.o.shiftwidth = vim.o.tabstop
 
-vim.o.termguicolors = true
 vim.o.mouse = "a"
 
 vim.g.indentLine_fileTypeExclude = { 'alpha', 'packer', 'vimwiki', 'help', 'man' }
