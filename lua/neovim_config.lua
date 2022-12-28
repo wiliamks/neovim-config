@@ -18,6 +18,7 @@ vim.o.mouse = "a"
 vim.g.indentLine_fileTypeExclude = { 'alpha', 'packer', 'vimwiki', 'help', 'man' }
 
 vim.o.clipboard = "unnamedplus"
+vim.o.lazyredraw = false
 
 vim.opt.wrap = false
 vim.opt.colorcolumn = "100"

@@ -9,6 +9,8 @@ vim.keymap.set("n", ";", ":", { noremap = true })
 vim.keymap.set({ 'n', 'v' }, "0", "^", { noremap = true })
 vim.keymap.set({ 'n', 'v', 'i' }, "<F11>", "<Home>", { noremap = true })
 vim.keymap.set({ 'n', 'v', 'i' }, "<F12>", "<End>", { noremap = true })
+vim.keymap.set('n', 'n', 'nzzzvw')
+vim.keymap.set('n', 'N', 'nzzzvw')
 
 map("n", "<C-b>", "<cmd>Neotree toggle<CR>")
 map("i", "<C-b>", "<cmd>Neotree toggle<CR>")
