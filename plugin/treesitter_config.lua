@@ -16,12 +16,14 @@ require 'nvim-treesitter.configs'.setup {
 		'json',
 		'jsonc',
 		'lua',
+		'markdown',
 		'python',
 		'ruby',
 		'rust',
 		'scala',
 		'tsx',
 		'typescript',
+		'vim'
 	},
 	highlight = {
 		enable = true,
@@ -53,3 +55,5 @@ require 'nvim-treesitter.configs'.setup {
 		enable = true
 	},
 }
+
+require 'hlargs'.setup()

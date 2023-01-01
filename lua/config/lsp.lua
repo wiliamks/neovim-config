@@ -19,16 +19,24 @@ local on_attach = function(_, bufnr)
 	vim.keymap.set('n', '[d', vim.diagnostic.goto_next, opts)
 	vim.keymap.set('n', ']d', vim.diagnostic.goto_prev, opts)
 	vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
-	vim.keymap.set('n', '<leader>so', require('telescope.builtin').lsp_document_symbols, opts)
+	vim.keymap.set('n', '<leader>so', require 'telescope.builtin'.lsp_document_symbols, opts)
 
-	vim.cmd [[ command! FormatLsp execute 'lua vim.lsp.buf.format { async = true }' ]]
+	api.nvim_create_user_command('Format', function()
+		vim.lsp.buf.format { async = true }
+	end, {})
+
+	vim.lsp.handlers["textDocument/references"] = require 'nice-reference'.reference_handler
+	vim.lsp.handlers['textDocument/declaration'] = require 'nice-reference'.definition_handler
+	vim.lsp.handlers['textDocument/definition'] = require 'nice-reference'.definition_handler
+	vim.lsp.handlers['textDocument/typeDefinition'] = require 'nice-reference'.definition_handler
+	vim.lsp.handlers['textDocument/implementation'] = require 'nice-reference'.definition_handler
 end
 
-require("mason").setup()
-require("mason-lspconfig").setup()
-require("mason-lspconfig").setup_handlers {
+require 'mason'.setup()
+require 'mason-lspconfig'.setup()
+require 'mason-lspconfig'.setup_handlers {
 	function(server_name)
-		require("lspconfig")[server_name].setup {
+		require 'lspconfig'[server_name].setup {
 			on_attach = on_attach
 		}
 	end,
@@ -56,18 +64,16 @@ for type, icon in pairs(signs) do
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-local metals_config = require("metals").bare_config()
+local metals_config = require 'metals'.bare_config()
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+metals_config.capabilities = require 'cmp_nvim_lsp'.default_capabilities(capabilities)
 metals_config.on_attach = on_attach
 
 local nvim_metals_group = api.nvim_create_augroup("nvim-metals", { clear = true })
 api.nvim_create_autocmd("FileType", {
-  pattern = { "scala", "sbt", "java" },
-  callback = function()
-    require("metals").initialize_or_attach(metals_config)
-  end,
-  group = nvim_metals_group,
+	pattern = { "scala", "sbt", "java" },
+	callback = function()
+		require 'metals'.initialize_or_attach(metals_config)
+	end,
+	group = nvim_metals_group,
 })
-
-vim.lsp.handlers["textDocument/references"] = require 'nice-reference'.reference_handler

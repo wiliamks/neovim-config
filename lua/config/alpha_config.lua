@@ -46,4 +46,4 @@ dashboard.section.buttons.val = {
 dashboard.section.footer.val = footer()
 dashboard.section.footer.opts.hl = "Constant"
 
-require"alpha".setup(dashboard.opts)
+require 'alpha'.setup(dashboard.opts)

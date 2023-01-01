@@ -1,24 +1,27 @@
-require("lazy").setup({
+require 'lazy'.setup({
 	'lewis6991/impatient.nvim',
-	'voldikss/vim-floaterm',
 
 	-- Telescope
 	{
 		'nvim-telescope/telescope.nvim',
-		dependencies = { 'nvim-lua/plenary.nvim', 'nvim-lua/popup.nvim' }
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+			'nvim-lua/popup.nvim',
+			{'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
+		}
 	},
+	{'kevinhwang91/nvim-bqf', ft = 'qf'},
 
 	-- Colors
 	{ 'norcalli/nvim-colorizer.lua', config = function() require 'colorizer'.setup() end },
 	{ 'wiliamks/mechanical.nvim', config = function() vim.cmd [[ colorscheme mechanical ]] end },
-	{
-		'Mofiqul/adwaita.nvim',
-		config = function()
-			vim.g.adwaita_darker = true -- for darker version
-			--vim.g.adwaita_disable_cursorline = true -- to disable cursorline
+	--{
+		--'Mofiqul/adwaita.nvim',
+		--config = function()
+			--vim.g.adwaita_darker = true -- for darker version
 			--vim.cmd([[colorscheme adwaita]])
-		end
-	},
+		--end
+	--},
 
 	-- Flutter
 	{
@@ -115,25 +118,25 @@ require("lazy").setup({
 	{
 		"jackMort/ChatGPT.nvim",
 		config = function()
-			require("chatgpt").setup({
-				-- optional configuration
-			})
+			require 'chatgpt'.setup({})
 		end,
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope.nvim"
-		}
+		},
+		cmd = 'ChatGPT'
 	},
 
 	-- Syntax
 	{
-		'nvim-treesitter/nvim-treesitter', build = ':TSUpdate',
-		dependencies = 'p00f/nvim-ts-rainbow'
+		'nvim-treesitter/nvim-treesitter',
+		build = ':TSUpdate',
+		dependencies = {
+			'p00f/nvim-ts-rainbow',
+			'm-demare/hlargs.nvim'
+		}
 	},
-
-	-- Formatting
-	'mhartington/formatter.nvim',
 
 	-- Tools
 	'goolord/alpha-nvim',
@@ -143,8 +146,7 @@ require("lazy").setup({
 	'tpope/vim-surround', --quoting/parenthesizing
 
 	-- Git
-	'tpope/vim-fugitive', --Git wrapper
 	'sindrets/diffview.nvim',
 	{ 'lewis6991/gitsigns.nvim', config = function() require 'gitsigns'.setup() end },
-	{ 'TimUntersberger/neogit', config = function() require 'neogit'.setup {} end },
+	{ 'TimUntersberger/neogit', config = function() require 'neogit'.setup {} end, cmd = 'Neogit' },
 })

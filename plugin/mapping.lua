@@ -16,16 +16,17 @@ map("n", "<C-b>", "<cmd>Neotree toggle<CR>")
 map("i", "<C-b>", "<cmd>Neotree toggle<CR>")
 map("n", "<C-p>", "<cmd>Neotree buffers right toggle<CR>")
 
-map("n", "<leader>T", "<cmd>FloatermNew<CR>")
+map("n", "<leader><C-f>", function ()
+	require 'telescope.builtin'.grep_string({ search = "", only_sort_text = true })
+end)
+map("n", "<leader>fg", function ()
+	require 'telescope.builtin'.live_grep({ only_sort_text = true })
+end)
+map("n", "<leader>ff", require 'telescope.builtin'.find_files)
+map("n","<leader><Tab>" , require 'telescope.builtin'.buffers)
+map("n", "<leader>fh", require 'telescope.builtin'.help_tags)
 
-map("n", "<leader><C-f>", "<cmd>Telescope live_grep<cr>")
-map("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
-map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
-map("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
-map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
 map("n", "<C-f>", "/")
-
-map("n","<leader><Tab>" ,"<cmd>Telescope buffers<cr>")
 
 map("n", "<leader><C-s>", ":bd <CR>")
 
@@ -41,10 +42,10 @@ map("n", "<leader>,", "viw")
 map("n", "<M-CR>", ":CodeActionMenu<CR>")
 map("v", "<M-CR>", ":<C-U>CodeActionMenu<CR>")
 
-map("n", "<leader>pgd", require('goto-preview').goto_preview_definition)
+map("n", "<leader>pgd", require 'goto-preview'.goto_preview_definition)
 
-map("n", "<leader>rn", require('renamer').rename)
-map("v",  "<leader>rn", require('renamer').rename)
+map("n", "<leader>rn", require 'renamer'.rename)
+map("v",  "<leader>rn", require 'renamer'.rename)
 
 map("n", "<C-k><C-s>", "<cmd> Neogit<CR>")
 
