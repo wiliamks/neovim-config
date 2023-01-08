@@ -68,6 +68,7 @@ require 'lazy'.setup({
 		dependencies = {
 			'williamboman/mason.nvim',
 			'williamboman/mason-lspconfig.nvim',
+			{ 'onsails/lspkind-nvim', config = function() require 'lspkind'.init() end },
 			{
 				'wiliamks/nice-reference.nvim',
 				branch = 'develop',
@@ -79,10 +80,6 @@ require 'lazy'.setup({
 			{
 				'weilbith/nvim-code-action-menu',
 				config = function() vim.g.code_action_menu_show_details = false end
-			},
-			{
-				'onsails/lspkind-nvim',
-				config = function() require 'lspkind'.init() end
 			},
 			{
 				'ray-x/lsp_signature.nvim',

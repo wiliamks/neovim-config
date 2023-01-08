@@ -1,3 +1,5 @@
+vim.cmd('colorscheme mechanical')
+
 require 'nvim-web-devicons'.setup {
 	override = {
 		[".gitignore"] = {

@@ -14,5 +14,3 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 require 'plugins'
-
-vim.cmd('colorscheme mechanical')
