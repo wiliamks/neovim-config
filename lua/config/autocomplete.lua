@@ -60,6 +60,11 @@ function M.setup()
 				winhighlight = "Normal:PmenuSel,FloatBorder:PmenuSel,CursorLine:PmenuSel,Search:None",
 			}
 		},
+		snippet = {
+			expand = function(args)
+				require 'luasnip'.lsp_expand(args.body)
+			end
+		},
 		formatting = {
 			fields = { "kind", "abbr", "menu" },
 			format = function(entry, vim_item)
