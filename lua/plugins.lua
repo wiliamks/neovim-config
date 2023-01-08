@@ -14,7 +14,7 @@ require 'lazy'.setup({
 
 	-- Colors
 	{ 'NvChad/nvim-colorizer.lua', event = "VeryLazy", config = function() require 'colorizer'.setup() end },
-	{ 'wiliamks/mechanical.nvim', config = function() vim.cmd [[ colorscheme mechanical ]] end },
+	{ 'wiliamks/mechanical.nvim', lazy = true },
 
 	-- Flutter
 	{
@@ -143,11 +143,36 @@ require 'lazy'.setup({
 	{ 'matze/vim-move', event = "VeryLazy" },
 	{ 'lukas-reineke/indent-blankline.nvim', event = "VeryLazy" },
 	{ 'goolord/alpha-nvim', config = function() require 'config.alpha_config'.setup() end },
-	{ 'numToStr/Comment.nvim', event = "BufRead" ,config = function() require 'Comment'.setup() end },
+	{ 'numToStr/Comment.nvim', event = "BufRead", config = function() require 'Comment'.setup() end },
 	{ 'kylechui/nvim-surround', event = "BufRead", config = function() require 'nvim-surround'.setup() end },
 
 	-- Git
 	{ 'sindrets/diffview.nvim', cmd = 'DiffviewOpen' },
 	{ 'lewis6991/gitsigns.nvim', event = "VeryLazy", config = function() require 'gitsigns'.setup() end },
 	{ 'TimUntersberger/neogit', config = function() require 'neogit'.setup {} end, cmd = 'Neogit' },
+}, {
+	performance = {
+		rtp = {
+			disabled_plugins = {
+				"netrw",
+				"netrwPlugin",
+				"netrwSettings",
+				"netrwFileHandlers",
+				"gzip",
+				"zip",
+				"zipPlugin",
+				"tar",
+				"tarPlugin",
+				"getscript",
+				"getscriptPlugin",
+				"vimball",
+				"vimballPlugin",
+				"2html_plugin",
+				"logipat",
+				"rrhelper",
+				"spellfile_plugin",
+				"matchit"
+			}
+		}
+	}
 })

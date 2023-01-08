@@ -23,6 +23,12 @@ local on_attach = function(_, bufnr)
 	vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
 	vim.keymap.set('n', '<leader>so', require 'telescope.builtin'.lsp_document_symbols, opts)
 
+
+	vim.keymap.set("n", "<leader>pgd", require 'goto-preview'.goto_preview_definition)
+	vim.keymap.set("n", "<leader>rn", require 'renamer'.rename)
+	vim.keymap.set("v", "<leader>rn", require 'renamer'.rename)
+
+
 	api.nvim_create_user_command('Format', function()
 		vim.lsp.buf.format { async = true }
 	end, {})

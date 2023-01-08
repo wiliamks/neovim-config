@@ -46,11 +46,6 @@ map("x", "<leader>cc", "<Plug>(comment_toggle_blockwise_visual)")
 map("n", "<M-CR>", ":CodeActionMenu<CR>")
 map("v", "<M-CR>", ":<C-U>CodeActionMenu<CR>")
 
-map("n", "<leader>pgd", require 'goto-preview'.goto_preview_definition)
-
-map("n", "<leader>rn", require 'renamer'.rename)
-map("v",  "<leader>rn", require 'renamer'.rename)
-
 map("n", "<C-k><C-s>", "<cmd> Neogit<CR>")
 
 -- Fugitive Conflict Resolution
