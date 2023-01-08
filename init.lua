@@ -14,4 +14,3 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 require 'plugins'
-require 'config'

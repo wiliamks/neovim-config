@@ -38,6 +38,10 @@ map("n", "<esc>", ":noh<return><esc>")
 map("n", "<esc>^[", "<esc>^[")
 
 map("n", "<leader>,", "viw")
+map("n", "<leader>c ", "<Plug>(comment_toggle_linewise_current)")
+map("n", "<leader>cc", "<Plug>(comment_toggle_blockwise_current)")
+map("x", "<leader>c ", "<Plug>(comment_toggle_linewise_visual)")
+map("x", "<leader>cc", "<Plug>(comment_toggle_blockwise_visual)")
 
 map("n", "<M-CR>", ":CodeActionMenu<CR>")
 map("v", "<M-CR>", ":<C-U>CodeActionMenu<CR>")
@@ -53,10 +57,3 @@ map("n", "<C-k><C-s>", "<cmd> Neogit<CR>")
 map("n", "<leader>gd", ":Gvdiffsplit!<CR>")
 map("n", "gdh", ":diffget //2<CR>")
 map("n", "gdl", ":diffget //3<CR>")
-
--- Formatting
-map ("n", "<C-k><C-f>", ":Format<CR>")
-
-for i = 1, 99 do
-	vim.keymap.set('n', i .. 'b', '<cmd>b ' .. i .. '<CR>')
-end

@@ -1,3 +1,5 @@
+local M = {}
+
 local vim = vim
 local api = vim.api
 
@@ -32,48 +34,51 @@ local on_attach = function(_, bufnr)
 	vim.lsp.handlers['textDocument/implementation'] = require 'nice-reference'.definition_handler
 end
 
-require 'mason'.setup()
-require 'mason-lspconfig'.setup()
-require 'mason-lspconfig'.setup_handlers {
-	function(server_name)
-		require 'lspconfig'[server_name].setup {
+function M.setup_flutter()
+	require 'flutter-tools'.setup {
+		widget_guides = {
+			enabled = true,
+		},
+		lsp = {
 			on_attach = on_attach
 		}
-	end,
-}
-
-vim.cmd("set pumheight=10")
-vim.cmd("set shortmess+=c")
-
-require 'flutter-tools'.setup {
-	widget_guides = {
-		enabled = true,
-	},
-	lsp = {
-		on_attach = on_attach
 	}
-}
-
-vim.diagnostic.config({
-	virtual_text = false,
-})
-
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-for type, icon in pairs(signs) do
-	local hl = "DiagnosticSign" .. type
-	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-local metals_config = require 'metals'.bare_config()
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-metals_config.capabilities = require 'cmp_nvim_lsp'.default_capabilities(capabilities)
-metals_config.on_attach = on_attach
+function M.setup()
+	require 'mason'.setup()
+	require 'mason-lspconfig'.setup()
+	require 'mason-lspconfig'.setup_handlers {
+		function(server_name)
+			require 'lspconfig'[server_name].setup {
+				on_attach = on_attach
+			}
+		end,
+	}
 
-local nvim_metals_group = api.nvim_create_augroup("nvim-metals", { clear = true })
-api.nvim_create_autocmd("FileType", {
-	pattern = { "scala", "sbt", "java" },
-	callback = function()
-		require 'metals'.initialize_or_attach(metals_config)
-	end,
-	group = nvim_metals_group,
-})
+	vim.diagnostic.config({
+		virtual_text = false,
+	})
+
+	local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+	for type, icon in pairs(signs) do
+		local hl = "DiagnosticSign" .. type
+		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+	end
+
+	local metals_config = require 'metals'.bare_config()
+	local capabilities = vim.lsp.protocol.make_client_capabilities()
+	metals_config.capabilities = require 'cmp_nvim_lsp'.default_capabilities(capabilities)
+	metals_config.on_attach = on_attach
+
+	local nvim_metals_group = api.nvim_create_augroup("nvim-metals", { clear = true })
+	api.nvim_create_autocmd("FileType", {
+		pattern = { "scala", "sbt", "java" },
+		callback = function()
+			require 'metals'.initialize_or_attach(metals_config)
+		end,
+		group = nvim_metals_group,
+	})
+end
+
+return M
