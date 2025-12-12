@@ -6,9 +6,9 @@ local function map(mode, key, action)
 end
 
 vim.keymap.set("n", ";", ":", { noremap = true })
-vim.keymap.set({ 'n', 'v' }, "0", "^", { noremap = true })
-vim.keymap.set({ 'n', 'v', 'i' }, "<F11>", "<Home>", { noremap = true })
-vim.keymap.set({ 'n', 'v', 'i' }, "<F12>", "<End>", { noremap = true })
+vim.keymap.set({ 'n', 'x' }, "0", "^", { noremap = true })
+vim.keymap.set({ 'n', 'x', 'i' }, "<F11>", "0", { noremap = true })
+vim.keymap.set({ 'n', 'x', 'i' }, "<F12>", "<End>", { noremap = true })
 vim.keymap.set('n', 'n', 'nzzzvw')
 vim.keymap.set('n', 'N', 'nzzzvw')
 
@@ -30,12 +30,11 @@ map("n", "<C-f>", "/")
 
 map("n", "<leader><C-s>", ":bd <CR>")
 
-map("v", "<c-f>", [[ y<ESC>/<c-r>"<CR> ]])
-map("v", "<C-r>", [["hy:%s/<C-r>h//gc<left><left><left>]])
+map("x", "<c-f>", [[ y<ESC>/<c-r>"<CR> ]])
+map("x", "<C-r>", [["hy:%s/<C-r>h//gc<left><left><left>]])
 
 ---- Clear highlighting on escape in normal mode
 map("n", "<esc>", ":noh<return><esc>")
-map("n", "<esc>^[", "<esc>^[")
 
 map("n", "<leader>,", "viw")
 map("n", "<leader>c ", "<Plug>(comment_toggle_linewise_current)")
@@ -44,11 +43,6 @@ map("x", "<leader>c ", "<Plug>(comment_toggle_linewise_visual)")
 map("x", "<leader>cc", "<Plug>(comment_toggle_blockwise_visual)")
 
 map("n", "<M-CR>", ":CodeActionMenu<CR>")
-map("v", "<M-CR>", ":<C-U>CodeActionMenu<CR>")
+map("x", "<M-CR>", ":<C-U>CodeActionMenu<CR>")
 
 map("n", "<C-k><C-s>", "<cmd> Neogit<CR>")
-
--- Fugitive Conflict Resolution
-map("n", "<leader>gd", ":Gvdiffsplit!<CR>")
-map("n", "gdh", ":diffget //2<CR>")
-map("n", "gdl", ":diffget //3<CR>")

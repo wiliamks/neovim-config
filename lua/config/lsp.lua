@@ -16,7 +16,7 @@ local on_attach = function(_, bufnr)
 	vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
 	vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
 	vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
-	vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+	vim.keymap.set("n", "gr", require 'nice-reference'.references)
 	vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
 	vim.keymap.set('n', '[d', vim.diagnostic.goto_next, opts)
 	vim.keymap.set('n', ']d', vim.diagnostic.goto_prev, opts)
@@ -38,6 +38,7 @@ local on_attach = function(_, bufnr)
 	vim.lsp.handlers['textDocument/definition'] = require 'nice-reference'.definition_handler
 	vim.lsp.handlers['textDocument/typeDefinition'] = require 'nice-reference'.definition_handler
 	vim.lsp.handlers['textDocument/implementation'] = require 'nice-reference'.definition_handler
+	-- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
 end
 
 function M.setup_flutter()

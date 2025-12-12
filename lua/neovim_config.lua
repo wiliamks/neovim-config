@@ -16,12 +16,20 @@ vim.o.shiftwidth = vim.o.tabstop
 vim.o.mouse = "a"
 
 vim.g.indentLine_fileTypeExclude = { 'alpha', 'packer', 'vimwiki', 'help', 'man' }
+vim.g.loaded_perl_provider = 0
 
 vim.o.clipboard = "unnamedplus"
 vim.o.lazyredraw = false
 
 vim.opt.wrap = false
 vim.opt.colorcolumn = "100"
+vim.opt.showmode = false
+vim.opt.laststatus = 0
+
+vim.o.foldcolumn = '0' -- '0' is not bad
+vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
 
 vim.cmd [[ 
 	set backspace=indent,eol,start
@@ -34,4 +42,5 @@ vim.cmd [[
 
 	set noshowcmd  " to get rid of display of last command
 	set shortmess+=F  
+	set mousescroll=ver:1
 ]]

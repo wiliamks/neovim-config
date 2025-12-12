@@ -16,8 +16,6 @@ function M.setup()
 			{ name = 'path' },
 			{ name = 'buffer' },
 			{ name = 'nvim_lua' },
-			{ name = 'emoji' },
-			{ name = 'latex_symbols' },
 			{ name = 'luasnip' },
 		},
 		mapping = {
@@ -25,12 +23,12 @@ function M.setup()
 			['<C-f>'] = cmp.mapping.scroll_docs(4),
 			['<C-Space>'] = cmp.mapping.complete(),
 			['<C-e>'] = cmp.mapping.close(),
-			['<CR>'] = cmp.mapping.confirm({ select = true, }),
+			['<CR>'] = cmp.mapping.confirm({ select = false }),
 			['<Down>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
 			['<Up>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
 			['<Tab>'] = cmp.mapping(function(fallback)
 				if cmp.visible() then
-					cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select })
+					cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
 				elseif luasnip.expand_or_jumpable() then
 					luasnip.expand_or_jump()
 				elseif has_words_before() then
@@ -41,7 +39,7 @@ function M.setup()
 			end, { "i", "s" }),
 			['<S-Tab>'] = cmp.mapping(function(fallback)
 				if cmp.visible() then
-					cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+					cmp.select_prev_item()
 				elseif luasnip.jumpable(-1) then
 					luasnip.jump(-1)
 				else
